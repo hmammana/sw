@@ -72,7 +72,10 @@
   </header>
   <main role="main">
 
-    <!-- contents goes heere -->
+    <a href="https://www.geeksandfood.com">Home</a>
+    <a href="https://listado.geeksandfood.com">Listado</a>
+    <a href="https://articulo.geeksandfood.com">Artículo</a>
+    <div id="app-lite-container"></div>
 
   </main>
   <footer role="contentinfo" class="nav-footer">
@@ -109,5 +112,24 @@
         CACHE_WHITELIST = ['lite-1.1.0'];
   </script>
   <script src="/worker-register.js"></script>
+  <script>
+    var main = document.querySelector('[role="main"]');
+    var container = document.querySelector('#app-lite-container');
+
+    main.addEventListener('click', function(event){
+      event.preventDefault();
+
+      container.innerHTML = fetch(event.target.href, {
+        method: 'get',
+        headers: new Headers({'x-lite', event.target.baseURI}),
+      }).then(function(response) {
+        return response.text();
+      }).catch(function(err) {
+        console.log(err);
+      });
+
+    });
+
+  </script>
 </body>
 </html>
