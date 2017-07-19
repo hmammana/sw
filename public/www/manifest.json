@@ -1,7 +1,6 @@
 {
   "name": "Lite Mercado Libre",
   "short_name": "Lite Mercado Libre ",
-  "gcm_sender_id": "280057668867",
   "background_color": "#fde600",
   "start_url": "/",
   "display": "standalone",
