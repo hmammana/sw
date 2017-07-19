@@ -115,11 +115,12 @@
   <script>
     var main = document.querySelector('[role="main"]');
     var container = document.querySelector('#app-lite-container');
+    var content = '';
 
     main.addEventListener('click', function(event){
       event.preventDefault();
 
-      container.innerHTML = fetch(event.target.href, {
+      content = fetch(event.target.href, {
         method: 'get',
         headers: new Headers({'x-lite': event.target.baseURI})
       }).then(function(response) {
