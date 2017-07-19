@@ -24,9 +24,10 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  var CACHE_WHITELIST = self.CACHE_WHITELIST;
+
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
+      var CACHE_WHITELIST = self.CACHE_WHITELIST;
       return Promise.all(
         cacheNames.map(function(cacheName) {
           if (CACHE_WHITELIST.indexOf(cacheName) === -1) {
