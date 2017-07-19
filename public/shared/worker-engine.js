@@ -24,12 +24,12 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  var self = self;
+  var CACHE_WHITELIST = self.CACHE_WHITELIST;
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.map(function(cacheName) {
-          if (self.CACHE_WHITELIST.indexOf(cacheName) === -1) {
+          if (CACHE_WHITELIST.indexOf(cacheName) === -1) {
             return caches.delete(cacheName);
           }
         })
