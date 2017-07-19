@@ -115,26 +115,19 @@
   <script>
     var main = document.querySelector('[role="main"]');
     var container = document.querySelector('#app-lite-container');
-    var content = '';
+
 
     main.addEventListener('click', function(event){
       event.preventDefault();
-      var headers = new Headers();
-          headers.append("X-Lite", event.target.baseURI);
-      var content = fetch(event.target.href, {
-        'method': 'GET',
-        'credentials': 'include',
-        'headers': {
-          'x-lite': 'app-lite'
-        },
-        'mode': 'cors'
-      }).then(function(response) {
-        return response.text();
+
+      fetch(event.target.href).then(function(response) {
+        response.text().then(function(value){
+          container.innerHTML = value;
+        });
       }).catch(function(err) {
         console.log(err);
       });
 
-      container.innerHTML = content;
     });
 
   </script>
