@@ -1,5 +1,5 @@
 var urlsToCache = [
   '/styles/home.css',
-  '/lite/'
+  '/lite'
 ];
 importScripts('/worker-engine.js');
