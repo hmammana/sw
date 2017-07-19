@@ -119,16 +119,22 @@
 
     main.addEventListener('click', function(event){
       event.preventDefault();
-
-      content = fetch(event.target.href, {
-        method: 'get',
-        headers: new Headers({'x-lite': event.target.baseURI})
+      var headers = new Headers();
+          headers.append("X-Lite", event.target.baseURI);
+      var content = fetch(event.target.href, {
+        'method': 'GET',
+        'credentials': 'include',
+        'headers': {
+          'x-lite': 'app-lite'
+        },
+        'mode': 'cors'
       }).then(function(response) {
         return response.text();
       }).catch(function(err) {
         console.log(err);
       });
 
+      container.innerHTML = content;
     });
 
   </script>
