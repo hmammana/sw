@@ -2,7 +2,7 @@
   "name": "Lite Mercado Libre",
   "short_name": "Lite Mercado Libre ",
   "background_color": "#fde600",
-  "start_url": "/",
+  "start_url": "/lite",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#fde600",
