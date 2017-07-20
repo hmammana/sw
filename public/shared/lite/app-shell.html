@@ -116,18 +116,18 @@
   <script>
     var main = document.querySelector('body');
     var container = document.querySelector('#app-lite-container');
-    var content = '';
+
 
     main.addEventListener('click', function(event){
       event.preventDefault();
+      var href = event.target.href;
+      var subdomain = href.substring(8,href.indexOf('.'));
 
-      content = fetch(event.target.href+'content.html', {
-        headers: {
-          'X-Lite':'true'
-        }}).then(function(response) {
-          return response.text().then(function(value){
+      fetch(href+'content.html', {headers: {'X-Lite':'true'}}).then(function(response) {
+          response.text().then(function(value){
             container.innerHTML = value;
-        });
+            window.history.pushState({},'','lite/'+subdomain);
+          });
       }).catch(function(err) {
         console.log(err);
       });
