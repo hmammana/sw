@@ -126,7 +126,7 @@
       fetch(href+'content.html', {headers: {'X-Lite':'true'}}).then(function(response) {
           response.text().then(function(value){
             container.innerHTML = value;
-            window.history.pushState({},'','lite/'+subdomain);
+            window.history.pushState({},'','/lite/'+subdomain);
           });
       }).catch(function(err) {
         console.log(err);
