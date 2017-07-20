@@ -116,14 +116,17 @@
   <script>
     var main = document.querySelector('body');
     var container = document.querySelector('#app-lite-container');
-
+    var content = '';
 
     main.addEventListener('click', function(event){
       event.preventDefault();
 
-      fetch(event.target.href+'content.html',{headers:{'X-Lite':'true'}}).then(function(response) {
-        response.text().then(function(value){
-          container.innerHTML = value;
+      content = fetch(event.target.href+'content.html', {
+        headers: {
+          'X-Lite':'true'
+        }}).then(function(response) {
+          return response.text().then(function(value){
+            container.innerHTML = value;
         });
       }).catch(function(err) {
         console.log(err);
