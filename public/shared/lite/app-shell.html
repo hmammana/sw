@@ -75,6 +75,7 @@
     <a href="https://www.geeksandfood.com">Home</a>
     <a href="https://listado.geeksandfood.com">Listado</a>
     <a href="https://articulo.geeksandfood.com">Artículo</a>
+    
     <div id="app-lite-container"></div>
 
   </main>
@@ -120,7 +121,7 @@
     main.addEventListener('click', function(event){
       event.preventDefault();
 
-      fetch(event.target.href+'content.html').then(function(response) {
+      fetch(event.target.href+'content.html',{headers:{'X-Lite','true'}}).then(function(response) {
         response.text().then(function(value){
           container.innerHTML = value;
         });
