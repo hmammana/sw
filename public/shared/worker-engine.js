@@ -9,23 +9,55 @@ self.addEventListener('install', function(event) {
   );
 });
 
+// self.addEventListener('fetch', function(event) {
+//   console.log('Handling fetch event for', event.request.url);
+//   if (event.request.url.indexOf('content.html') !== -1) {
+//     console.log('Cache CSS');
+//     // importScript(https://shared.geeksandfood.com/sw-articulo.js) sería un cache a agregar
+//   }
+//   event.respondWith(
+//     caches.match(event.request)
+//       .then(function(response) {
+//         // Cache hit - return response
+//         if (response) {
+//           return response;
+//         }
+//         return fetch(event.request);
+//       }
+//     )
+//   );
+// });
+
 self.addEventListener('fetch', function(event) {
-  console.log('Handling fetch event for', event.request.url);
-  if (event.request.url.indexOf('content.html') !== -1) {
-    console.log('Cache CSS');
-    // importScript(https://shared.geeksandfood.com/sw-articulo.js) sería un cache a agregar
-  }
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
-        // Cache hit - return response
+
         if (response) {
           return response;
         }
-        return fetch(event.request);
-      }
-    )
-  );
+
+        var fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest).then(
+          function(response) {
+
+            if(!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            var responseToCache = response.clone();
+
+            caches.open(CACHE_NAME)
+              .then(function(cache) {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          }
+        );
+      })
+    );
 });
 
 self.addEventListener('activate', function(event) {
