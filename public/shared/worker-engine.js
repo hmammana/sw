@@ -11,6 +11,10 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for', event.request.url);
+  if (event.request.url.indexOf('content.html') !== -1) {
+    console.log('Cache CSS');
+    // importScript(https://shared.geeksandfood.com/sw-articulo.js) sería un cache a agregar
+  }
   event.respondWith(
     caches.match(event.request)
       .then(function(response) {
