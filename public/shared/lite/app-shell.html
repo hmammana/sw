@@ -126,6 +126,9 @@
       fetch(href+'content.html', {headers: {'X-Lite':'true'}}).then(function(response) {
           response.text().then(function(value){
             container.innerHTML = value;
+            var link = container.getElementsByTagName('link')[0];
+            container.removeChild(link);
+            container.insertAdjacentElement('beforebegin', link);
             window.history.pushState({},'','/lite/'+subdomain);
           });
       }).catch(function(err) {
